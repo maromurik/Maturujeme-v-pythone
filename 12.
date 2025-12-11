@@ -1,0 +1,20 @@
+fr = open("bus_vytazenost.txt","r",encoding = "cp1250")
+kapacita = int(fr.readline())
+zastavky = 0
+aktualny_pocet_ludi = 0
+najvac = 1
+preplnene = []
+for riadok in fr:
+    zastavky+=1
+    data = riadok.strip().split()
+    nazov = " ".join(data[2:])
+    nastup = int(data[0])
+    vystup = int(data[1])
+    aktualny_pocet_ludi = aktualny_pocet_ludi+nastup-vystup
+    if aktualny_pocet_ludi > najvac:
+        najvac = aktualny_pocet_ludi
+    print(nazov,end=",")
+    if aktualny_pocet_ludi > kapacita:
+        preplnene.append(nazov)
+print(preplnene)
+print(najvac)
