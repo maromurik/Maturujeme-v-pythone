@@ -1,0 +1,21 @@
+fr = open("tabulka_pocetnosti.txt", "r", encoding="utf-8")
+text = fr.read()
+
+
+print("Obsah súboru:")
+print(text)
+print("\n")
+
+
+from string import ascii_uppercase
+
+pocet = {pismeno: 0 for pismeno in ascii_uppercase}
+
+for znak in text.upper():
+    if znak in pocet:
+        pocet[znak] += 1
+
+print("Počty jednotlivých znakov v texte:")
+for pismeno, vyskyt in pocet.items():
+    print(f"{pismeno} - {vyskyt}")
+
