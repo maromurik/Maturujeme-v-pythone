@@ -1,0 +1,32 @@
+import random
+def miesaj(co,typ_miesania = True):
+    velkost = len(co)
+    if typ_miesania:
+        for pocet in range(velkost**2):
+            i = random.randrange(0,velkost)
+            j = random.randrange(0,velkost)
+            pom = co[j]
+            co[j] = co[i]
+            co[i] = pom
+            # co[i],co[j] = co[j], co[i] #SPECIALITKA PYTHONU
+
+    else:
+        parne_otazky = [i for i in range(2,velkost,2)]
+        random.shuffle(parne_otazky)
+        neparne_otazky = [i for i in range(1, velkost, 2)]
+        random.shuffle(neparne_otazky)
+        for i in range(0,velkost//2-1,):
+            co[i*2] = parne_otazky[i]
+            co[i*2+1] = neparne_otazky[i]
+
+
+
+student = [i for i in range(1,int(input("zadaj studentov: "))+1)]
+otazka = [i for i in range(1,int(input("zadaj otazky: "))+1)]
+if len(student) > len(otazka):
+    print("NEFUNGUJE")
+else:
+    miesaj(student)
+    miesaj(otazka,False)
+    for cislo in range(len(student)):
+        print(f"Student cislo: {student[cislo]} - Otazka cislo: {otazka[cislo]}")
