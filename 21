@@ -1,0 +1,19 @@
+import random
+
+with open("poprehadzovany_text1_vstup.txt", "r", encoding="cp1250") as fr:
+    nove_riadky = []
+    for riadok in fr:
+        slova = riadok.strip().split()
+        nove_slova = []
+        for slovo in slova:
+            if len(slovo) > 3:
+                stred = list(slovo[1:-1])
+                random.shuffle(stred)
+                nove = slovo[0] + "".join(stred) + slovo[-1]
+            else:
+                nove = slovo
+            nove_slova.append(nove)
+        nove_riadky.append(" ".join(nove_slova))
+
+with open("hotovo.txt", "w", encoding="cp1250") as fw:
+    fw.write("\n".join(nove_riadky))
