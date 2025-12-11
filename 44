@@ -1,0 +1,41 @@
+import random
+import tkinter as tk
+
+width = 600
+pos_y = 10
+win = tk.Tk()
+canvas = tk.Canvas(win,width=width,height=1000,bg = "hotpink")
+canvas.pack()
+slova= ["tkinter","python","rozok","jozo","miso",]
+vybrane = random.choice(slova)
+pocet_hviezd = len(vybrane)
+hadane_slovo = "*"*pocet_hviezd
+sprite = canvas.create_text(random.randrange(0,width),pos_y,text=hadane_slovo)
+
+
+def animation():
+    canvas.move(sprite,0,1)
+    if canvas.coords(sprite)[1] > 950 :
+        canvas.create_text(500,500,text= "PREHRAL SI")
+    else:
+        canvas.after(10,animation,)
+        if "*" not in hadane_slovo:
+            canvas.after(10,win.destroy)
+            print("VYHRAL SI")
+
+
+def yes(event):
+    global hadane_slovo
+    if event.char in vybrane:
+        pozicia = vybrane.find(event.char)
+        hadane_slovo = hadane_slovo[:pozicia:]+event.char+hadane_slovo[pozicia+1:]
+        canvas.itemconfig(sprite,text=hadane_slovo)
+
+
+win.bind("<Key>",yes)
+
+
+
+
+animation()
+win.mainloop()
