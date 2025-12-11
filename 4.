@@ -1,0 +1,26 @@
+fr = open("meteo_stanice.txt","r")
+merania = 0
+teploty =[]
+kod_najvacsieho = ""
+najviac = -10000
+for riadok in fr:
+    merania +=1
+    for i in range(0,len(riadok)):
+        if riadok[i] == "+" or riadok[i] == "-" :
+            if riadok[i+1] != "0":
+                teplota= (float(riadok[i]+riadok[i+1]+riadok[i+2]+"."+riadok[i+4]))
+            else:
+                teplota =(float(riadok[i]+riadok[i+2]+"."+riadok[i+4]))
+
+            teploty.append(teplota)
+            if najviac < teplota:
+                najviac = teplota
+                kod_najvacsieho = riadok[0:3]
+
+
+
+print(merania)
+print(teploty)
+print(max(teploty))
+print(kod_najvacsieho)
+print(sum(teploty)/merania)
