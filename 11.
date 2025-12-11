@@ -1,0 +1,13 @@
+fr = open("sutaz_vbehu.txt","r")
+sutaziaci = 0
+najlepsi = 10000
+meno_naj = ""
+for riadok in fr:
+    sutaziaci+=1
+    meno, cas = riadok.strip().split()
+    cas = int(cas)
+    print(f"Súťažiaci {meno} prišiel do cieľa za {cas} sekúnd")
+    if cas < najlepsi:
+        najlepsi = cas
+        meno_naj = meno
+print(f"Najlepší: {meno_naj} {najlepsi//60}min. {najlepsi%60}sek. ")
