@@ -1,0 +1,22 @@
+fr = open("hada.txt", "r")
+fw = open("vysledok.txt","w")
+counter = 1
+riadky = 0
+dlzka_riadka = 0
+kratky = 1154080590590590596164605604505
+for riadok in fr:
+   riadky+=1
+   if len(riadok) > dlzka_riadka:
+    dlzka_riadka = len(riadok.strip())
+   if len(riadok) < kratky:
+     kratky = len(riadok.strip())
+   for i in range(1,len(riadok)):       #i je int
+      if riadok[i] == riadok[i-1]:
+        counter+=1
+      else:
+        fw.write(riadok[i-1]+str(counter)+ " ")
+        counter = 1
+fw.write("\n")
+print(f"najdlhsia hra bola {dlzka_riadka}")
+print(f"najkratsia hra bola {kratky}")
+fw.close()
