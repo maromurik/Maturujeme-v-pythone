@@ -1,0 +1,33 @@
+import random
+
+fr = open("virus.txt", "r", encoding="windows-1250")
+riadky = fr.readlines()
+fr.close()
+
+print("PÔVODNÝ TEXT:")
+for i in riadky:
+    print(i.strip())
+
+if random.choice([True, False]):
+    random.shuffle(riadky)
+
+novy_text = []
+
+for riadok in riadky:
+    slova = riadok.strip().split(" ")
+
+    if random.choice([True, False]):
+        random.shuffle(slova)
+
+    nove_slova = []
+    for slovo in slova:
+        if random.choice([True, False]):
+            slovo = slovo[::-1]
+        nove_slova.append(slovo)
+
+    novy_text.append(" ".join(nove_slova))
+
+fw = open("virus_vystup.txt", "w", encoding="windows-1250")
+for r in novy_text:
+    fw.write(r + "\n")
+fw.close()
