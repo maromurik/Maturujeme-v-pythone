@@ -1,0 +1,38 @@
+import random
+
+moje = list(map(int, input("Zadaj 6 cisel: ").split()))
+
+vyherne = random.sample(range(1, 100), 6)
+print("Vyherne cisla:", vyherne)
+
+vysledky = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+
+pocet_ludi = 0
+
+fr = open("loteria_1.txt", "r", encoding="utf-8")
+
+for riadok in fr:
+    pocet_ludi += 1
+    cisla = list(map(int, riadok.split()))
+
+    zhoda = 0
+    for c in cisla:
+        if c in vyherne:
+            zhoda += 1
+
+    if zhoda in vysledky:
+        vysledky[zhoda] += 1
+
+fr.close()
+
+trafene = []
+for c in moje:
+    if c in vyherne:
+        trafene.append(c)
+
+print("\nSTATISTIKA:")
+for i in range(1,7):
+    print(f"{i} trafenych: {vysledky[i]}")
+
+print("Pocet ludi:", pocet_ludi)
+print("Tvoje trafene:", len(trafene), trafene)
