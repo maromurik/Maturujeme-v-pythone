@@ -1,0 +1,22 @@
+POCITACOVE SIETE
+poc.siet - prepojenie 2 a viac zariadeni za ucelom vzajomnej komunikacie
+Problem komunikacie pomerne zlozity rozdelil sa na VRSTVY
+1. iso/osi -> 7vrstiev (neujal sa, je teoreticky)
+TCP/IP -> 4 vrstvy (pouziva sa vsade)
+VRSTVY: 1. APLIKACNA - protokoly napr. HTTP,HTTPS,FTP......
+        2. TRANSPORTNA - protokol UDP(nespolahlivy)/TCP---------------------->
+        3. SIETOVA - protokol IP --------------------------> PODLA TYCHTO DVOCH TO CELE DOSTALO MENO LEBO SU DOLEZITE  
+        4. FYZICKA/SIETOVEHO ROZHRANIA - ETHERNET
+Na kazdej urovni bezie nejake protokoly
+Na aplikacnej vrstve vznikaju data ktore sa idu prenasat
+V protokole IP sa do dat pribaluju IP adresy
+IP ADRESA = 32BITOVY IDENTIFIKATOR SIETE A ZARIADENIA (4X8BITOV ODDELENE BODKAMI)
+maska podsiete vacsinou 255.255.255.0 0 urcuje cislo zariadenia
+Protokol NAT (network adress translator) - pripojim router na Ip adresu a pomocou NAT vytvori podsiet
+Protokol DHCP - automaticky priraduje Ip zariadeniam v sieti
+Ip adresa nie je jednoznacny identifikator zariadenia
+MAC Adresa/fyzicka adresa - jednoznacny identifikator zariadenia 
+Internet - decentralizovana siet sieti
+Podla velkosti : LAN = local area network, MAN = metropolitan area network ,WAN = wide area network
+Ethernetovy kabel inak - STP(shield twisted pair) UTP(unshield twisted pair)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
