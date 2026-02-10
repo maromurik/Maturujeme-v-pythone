@@ -25,6 +25,13 @@ Zariadenia na vytvaranie sieti: hub, switch(prepinac), router(smerovac)
 Hub -> stary, na prd
 Switch -> Pracuje na urovni sietoveho rozhrania, vie citat MAC adresy, posiela ramec tam kam ma
 Router -> Pracuje na sietovej urovni, vie citat IP adresy, pracuje s paketami
-
-
+PROCES KOMUNIKACIE NA SIETI: NA SERVER -> IP adresa odosielatela+ IP adresa prijimatela (sietova vrstva), NA ROUTER -> Mac adresa odosielatela+ MAC adresa prijimatela(fyzicka vrstva)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+VON NEUMANNOV PRINCÍP FUNGOVANIA POČÍTAČA
+Vyssie programovacie jazyky: PHP, C++,C#, Java, Python....
+- kod sa tu meni na strojovy kod(subor 0 a 1) aby tomu pc rozumel 
+existuju 2 preklady : KOMPILACIA(rychlejsie, cele naraz[vysledok vacsinou .exe subor]), INTERPRETACIA(pomalsi, napr python[riadok po riadku])
+Assembler = jazyk symbolickych adries
+CPU(centralna procesorova jednotka) sa sklada z - Riadiaca jednotka, Aritmeticko logicka jednotka, Registre(mala pamat[niekolko kb])
+RIADIACA JEDNOTKA VYBERA INSTURKCIE Z PAMATI(RAM), ARITMETICKO LOGICKA ICH SPRACUJE A VYSLEDKY VYPOCTOV SA UKLADAJU DO REGISTROV - VON NEUMANNOV PRINCIP
+
