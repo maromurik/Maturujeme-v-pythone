@@ -34,4 +34,13 @@ existuju 2 preklady : KOMPILACIA(rychlejsie, cele naraz[vysledok vacsinou .exe s
 Assembler = jazyk symbolickych adries
 CPU(centralna procesorova jednotka) sa sklada z - Riadiaca jednotka, Aritmeticko logicka jednotka, Registre(mala pamat[niekolko kb])
 RIADIACA JEDNOTKA VYBERA INSTURKCIE Z PAMATI(RAM), ARITMETICKO LOGICKA ICH SPRACUJE A VYSLEDKY VYPOCTOV SA UKLADAJU DO REGISTROV - VON NEUMANNOV PRINCIP
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2 TYPY SPRACOVANIA OBRAZKOV - rastrova grafika, vektorova grafika
+raster = mriezka 
+1 kocka v mriezke = pixel, 1 pixel = 1 farba
+to ako je tam zakodovana farba nam hovori FAREBNY MODEL napr RGB, RGBA .....
+Gamut = rozsah farieb ktory dokazem namiesat
+RGB = model urceny pre zariadenia ktore svetlo VYZARUJU (monitor)
+CMyK = model urceny pre zariadenia ktore svetlo ODRAZAJU (tlaciaren)
+
 
