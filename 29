@@ -1,0 +1,41 @@
+fr = open("kompresia_obrazka_1 (1).txt", "r", encoding="utf-8")
+fw = open("kompresia_obrazka_vystup.txt", "w", encoding="utf-8")
+
+rozmery = fr.readline().strip()
+sirka, vyska = map(int, rozmery.split())
+
+print("Šírka:", sirka)
+print("Výška:", vyska)
+print("Počet bodov:", sirka * vyska)
+
+fw.write(rozmery + "\n")
+
+
+def spracuj_riadok(riadok):
+    vysledok = ""
+    pocet = 1
+
+    if riadok[0] == "1":
+        vysledok += "0 "
+
+    for i in range(1, len(riadok)):
+        if riadok[i] == riadok[i - 1]:
+            pocet += 1
+        else:
+            vysledok += str(pocet) + " "
+            pocet = 1
+
+
+    vysledok += str(pocet)
+
+    return vysledok
+
+
+
+for riadok in fr:
+    riadok = riadok.strip()
+    komprimovany = spracuj_riadok(riadok)
+    fw.write(komprimovany + "\n")
+
+fr.close()
+fw.close()
