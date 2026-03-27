@@ -1,0 +1,25 @@
+fr = open("hlasovanie_1.txt","r",encoding = "utf-8")
+fr2 = open("hlasovanie_vypadnuti.txt","r",encoding = "utf-8")
+celkovo = 0
+najmenej = []
+najmenej2 = []
+
+vyp = []
+for riadok in fr2:
+    vyp.append(riadok.strip())
+for riadok in fr:
+    vsetci = riadok.strip()
+    celkovo+=1
+    najmenej.append(vsetci)
+    if vsetci not in vyp:
+        najmenej2.append(vsetci)
+
+print(min(set(najmenej), key=najmenej.count))
+print(min(set(najmenej2), key=najmenej2.count))
+
+
+
+
+
+
+
