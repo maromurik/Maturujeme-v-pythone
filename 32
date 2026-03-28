@@ -1,0 +1,30 @@
+fr = open("ciernobiely_obrazok_1.txt","r",encoding = "utf-8")
+fw = open("novy.txt","w",encoding = "utf-8")
+rozmery = fr.readline().strip()
+fw.write(rozmery)
+print(rozmery)
+prvapol = "01234567"
+
+
+def spracuj_riadok(riadok):
+    vysledok = ""
+    riadok = riadok.strip()
+
+    for i in range(0, len(riadok), 2):
+        pixel = riadok[i:i + 2] 
+        hodnota = int(pixel, 16)
+
+        if hodnota < 128:
+            vysledok += "0 "
+        else:
+            vysledok += "1 "
+
+    fw.write(vysledok.strip() + "\n")
+
+for riadok in fr:
+    spracuj_riadok(riadok)
+
+
+
+fw.close()
+fr.close()
