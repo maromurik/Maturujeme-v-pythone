@@ -1,0 +1,49 @@
+import tkinter as tk
+fr = open("noty.txt","r",encoding="utf-8")
+root = tk.Tk()
+noty = fr.readline().strip()
+pocet_not = len(noty)
+vyska = 600
+sirka = 800
+canvas = tk.Canvas(height = vyska,width=sirka)
+canvas.pack()
+vyska_nota = 10
+sirka_nota = 25
+vzdialenost_osnov = 3*sirka_nota
+offset = {"c":0,"d":0.5,"e":1,"f":1.5,"g":2,"a":2.5,"h":3}
+
+
+
+def osnova(pocet=1,medzera=100):
+    pocet = sirka//(pocet_not*sirka_nota)
+    for x in range(pocet):
+        for i in range(5):
+            canvas.create_line(sirka_nota,vyska_nota+i*vyska_nota+medzera*x,sirka-sirka_nota,vyska_nota+i*vyska_nota+medzera*x)
+
+def vykreslit_noty(pocet_not,noty):
+    for poradie in range(len(noty)):
+        print(noty[poradie])
+        
+
+
+
+osnova()
+vykreslit_noty(pocet_not,noty)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+root.mainloop()
