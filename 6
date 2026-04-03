@@ -1,49 +1,40 @@
 import tkinter as tk
-fr = open("noty.txt","r",encoding="utf-8")
+
+fr = open("noty.txt", "r", encoding="utf-8")
 root = tk.Tk()
 noty = fr.readline().strip()
 pocet_not = len(noty)
 vyska = 600
 sirka = 800
-canvas = tk.Canvas(height = vyska,width=sirka)
+canvas = tk.Canvas(height=vyska, width=sirka)
 canvas.pack()
 vyska_nota = 10
 sirka_nota = 25
-vzdialenost_osnov = 3*sirka_nota
-offset = {"c":0,"d":0.5,"e":1,"f":1.5,"g":2,"a":2.5,"h":3}
+rozostup = 40
+vzdialenost_osnov = 3 * sirka_nota
+offset = {"c": -2, "d": -1, "e": 0, "f": 1, "g": 2, "a": 3, "h": 4}
+noty_na_osnovu = (sirka - 2 * sirka_nota) // rozostup
 
-
-
-def osnova(pocet=1,medzera=100):
-    pocet = sirka//(pocet_not*sirka_nota)
+def osnova(pocet=1, medzera=100):
+    pocet = (pocet_not // noty_na_osnovu) + 1
     for x in range(pocet):
         for i in range(5):
-            canvas.create_line(sirka_nota,vyska_nota+i*vyska_nota+medzera*x,sirka-sirka_nota,vyska_nota+i*vyska_nota+medzera*x)
+            canvas.create_line(sirka_nota, vyska_nota + i * vyska_nota + medzera * x, sirka - sirka_nota,
+                               vyska_nota + i * vyska_nota + medzera * x)
 
-def vykreslit_noty(pocet_not,noty):
+
+def vykreslit_noty(pocet_not, noty):
     for poradie in range(len(noty)):
-        print(noty[poradie])
-        
-
+        osnova_index = poradie // noty_na_osnovu
+        pozicia_na_osnove = poradie % noty_na_osnovu
+        y_spodna = vyska_nota + 4 * vyska_nota + osnova_index * 100
+        y = y_spodna - offset[noty[poradie]] * (vyska_nota // 2)
+        x = sirka_nota + (pozicia_na_osnove + 1) * rozostup
+        canvas.create_oval(x - sirka_nota // 2, y - vyska_nota // 2,
+                           x + sirka_nota // 2, y + vyska_nota // 2)
 
 
 osnova()
-vykreslit_noty(pocet_not,noty)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+vykreslit_noty(pocet_not, noty)
 
 root.mainloop()
