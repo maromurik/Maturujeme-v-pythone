@@ -1,0 +1,50 @@
+import tkinter as tk
+
+fr = open("zastavky.txt", "r", encoding="windows-1250")
+zastavky = []
+for riadok in fr:
+    zastavky.append(riadok.strip())
+fr.close()
+
+root = tk.Tk()
+root.title("Displej v električke")
+
+SIRKA_DISPLEJA = 20
+aktualna = 0
+pozicia = 0
+after_id = None
+
+canvas = tk.Canvas(root, width=400, height=80, bg="black")
+canvas.pack()
+
+text_id = canvas.create_text(10, 40, text="", anchor="w", font=("Courier", 24), fill="yellow")
+
+def zobraz():
+    global pozicia, after_id
+    if aktualna >= len(zastavky):
+        return
+    nazov = zastavky[aktualna]
+    if aktualna == len(zastavky) - 1:
+        nazov += " - VYSTUPTE!"
+    # pridame medzery na zaciatku aj na konci aby text prisiel sprava a odisiel dolava
+    text = " " * SIRKA_DISPLEJA + nazov + " " * SIRKA_DISPLEJA
+    zobrazeny = text[pozicia:pozicia + SIRKA_DISPLEJA]
+    canvas.itemconfig(text_id, text=zobrazeny)
+    pozicia = (pozicia + 1) % (len(nazov) + SIRKA_DISPLEJA)
+    after_id = root.after(300, zobraz)
+
+def dalsia_zastavka(event=None):
+    global aktualna, pozicia, after_id
+    if after_id is not None:
+        root.after_cancel(after_id)
+    aktualna += 1
+    pozicia = 0
+    if aktualna < len(zastavky):
+        zobraz()
+    else:
+        canvas.itemconfig(text_id, text="Koniec linky")
+
+root.bind("<Key>", dalsia_zastavka)
+
+zobraz()
+root.mainloop()
