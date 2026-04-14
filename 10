@@ -1,0 +1,39 @@
+import tkinter as tk
+
+velkost = 50
+root = tk.Tk()
+
+w = 800
+h = 500
+canvas = tk.Canvas(width = w, height=h, bg="white")
+canvas.pack()
+
+def kresli(x,y,velkost,aj_pismena):
+    fr = open("krizovka1-1.txt","r", encoding = "utf-8")
+    poc = 0
+    pozicia_prveho = 0
+    for riadok in fr:
+        poc+=1
+        data = riadok.strip().split()
+        poz = int(data[0])
+        if pozicia_prveho == 0:
+            pozicia_prveho+= poz
+        slovo = data[1]
+        print(slovo[poz-1])
+        for i in range(len(slovo)):
+            posun = pozicia_prveho-poz
+            x1 = x + i * velkost + posun * velkost
+            x2 = x+velkost + i * velkost + posun * velkost
+            y1 = velkost * poc+y
+            y2 = velkost + velkost * poc+y
+            canvas.create_rectangle(x1,y1 , x2, y2)
+
+            if i+1 == poz:
+                canvas.create_rectangle(x1,y1,x2,y2, fill ="gray", outline ="black")
+            if aj_pismena == True:
+                canvas.create_text((x1+x2)//2,(y1+y2)//2,text = slovo[i],font = ("Arial",velkost//2))
+
+kresli(10, 10,25,False)
+kresli(300,10,25,True)
+
+root.mainloop()
