@@ -1,0 +1,30 @@
+fr = open("skok_do_dialky.txt","r", encoding = "utf-8")
+krajiny = {}
+najlepsi = ""
+naj = 0
+for riadok in fr:
+    Meno,kod_krajiny,vykon1,vykon2,vykon3,vykon4,vykon5 = riadok.strip().split()
+    if kod_krajiny in krajiny:
+        krajiny[kod_krajiny]+=1
+    else:
+        krajiny[kod_krajiny] = 1
+    vykony = vykon1,vykon2,vykon3,vykon4,vykon5
+    for i in range(len(vykony)):
+        if int(vykony[i]) > naj:
+            naj = int(vykony[i])
+            najlepsi = ""
+            najlepsi += Meno
+        elif int(vykony[i]) == naj:
+            najlepsi+= ","+Meno
+
+kraj = []
+poc = []
+for i in krajiny.keys():
+    kraj.append(i)
+for i in krajiny.values():
+    poc.append(i)
+print(f"Krajiny: {" ".join(kraj)}")
+print("Pocet sutaziacich z jednotlivych krajin:")
+for i in range(len(poc)):
+    print(f"{kraj[i]}: {poc[i]}")
+print(f"Vitazi: {najlepsi}")
