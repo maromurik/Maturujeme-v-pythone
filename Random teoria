@@ -26,6 +26,15 @@ Hub -> stary, na prd
 Switch -> Pracuje na urovni sietoveho rozhrania, vie citat MAC adresy, posiela ramec tam kam ma
 Router -> Pracuje na sietovej urovni, vie citat IP adresy, pracuje s paketami
 PROCES KOMUNIKACIE NA SIETI: NA SERVER -> IP adresa odosielatela+ IP adresa prijimatela (sietova vrstva), NA ROUTER -> Mac adresa odosielatela+ MAC adresa prijimatela(fyzicka vrstva)
+SMTP (simple mail transfer protocol) - medzi serverami
+FTP = file transport protocol
+DNS(domain-name system) konvertuju IP adresu na nazov a naopak s tymto suivisi pharming(prepisuju DNS)
+HTTP hypertext transfer protocol - obsahuje linky - prenasa sa to ako plain text
+HTTPS secure - asymetricky sifrovane (man in the middle to neprecita)
+URL uniform resource link - citaju sa odzadu
+Cookies - ulozi sa tam identifikator mojho spojenia
+sketchup modelovanie
+gimp zaklady
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 VON NEUMANNOV PRINCÍP FUNGOVANIA POČÍTAČA
 Vyssie programovacie jazyky: PHP, C++,C#, Java, Python....
