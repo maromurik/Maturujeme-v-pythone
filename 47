@@ -1,0 +1,40 @@
+import tkinter as tk, random
+nahodny = random.randrange(10000000,100000000)
+w = 500
+h = 500
+root = tk.Tk()
+canvas = tk.Canvas(root,width = w, height = h, bg = "white")
+canvas.pack()
+aktualny_riadok = 0
+def kresli_kod(kod,kde):
+    poc = 1
+    poc_riadok = 0
+    ciara = 1
+    canvas.create_text(10 * poc + poc_riadok * 50 + 35+kde, 70, text=kod)
+    for i in kod:
+        if ciara == 1 or ciara == 8:
+            canvas.create_line(10 * poc + poc_riadok * 50+kde, 0, 10 * poc + poc_riadok * 50+kde, 80, width=int(i))
+        else:
+            canvas.create_line(10 * poc + poc_riadok * 50+kde, 0, kde+10 * poc + poc_riadok * 50, 60, width=int(i))
+        poc += 1
+        ciara += 1
+    poc_riadok += 1
+    ciara = 1
+def kresli(event):
+    global aktualny_riadok
+    fr = open("ciarovy_kod_1.txt", "r", encoding="utf-8")
+    riadky = fr.readlines()
+    canvas.delete("all")
+    poc = 1
+    poc_riadok = 0
+    ciara = 1
+    for poc_riadok, riadok in enumerate(riadky[aktualny_riadok:aktualny_riadok + 4]):
+        kresli_kod(riadok.strip(), poc_riadok * 120)
+    aktualny_riadok += 4
+root.bind("<space>", kresli)
+
+kresli_kod(str(nahodny),1)
+fr = open("ciarovy_kod_1.txt","r",encoding = "utf-8")
+kresli_kod(fr.readline().strip(),300)
+
+root.mainloop()
