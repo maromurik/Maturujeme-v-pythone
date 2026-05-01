@@ -1,0 +1,36 @@
+import tkinter as tk
+
+root = tk.Tk()
+w = 1000
+h = 500
+canvas = tk.Canvas(width=w, height=h, bg="white")
+canvas.pack()
+
+vstup = tk.Entry(root)
+vstup.pack()
+tlacidlo = tk.Button(root, text="Vykresli", command=lambda: kresli())
+tlacidlo.pack()
+
+def kresli():
+    canvas.delete("all")
+    hranica = int(vstup.get())
+    fr = open("zastavba_na_ulici.txt", "r", encoding="utf-8")
+    posun = 0
+    predosla_vyska = 0
+    for riadok in fr:
+        sirka, vyska = riadok.strip().split()
+        sirka = int(sirka)
+        vyska = int(vyska)
+        if vyska != 0:
+            canvas.create_rectangle(posun, h, sirka + posun, h - vyska)
+            if predosla_vyska != 0:
+                if abs(predosla_vyska - vyska) > hranica:
+                    canvas.create_line(posun, h - vyska, posun, h - predosla_vyska, fill="red")
+            predosla_vyska = vyska
+        else:
+            canvas.create_rectangle(posun, h, sirka + posun, h - vyska, outline="green", width=5)
+            predosla_vyska = 0
+        posun += sirka
+    fr.close()
+
+root.mainloop()
