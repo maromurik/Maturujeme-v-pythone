@@ -1,0 +1,25 @@
+import random
+fr = open("obesenec.txt","r",encoding = "utf-8")
+slova = []
+
+for riadok in fr:
+    riadok = riadok.strip()
+    slova.append(riadok)
+hadane = random.choice(slova)
+print(len(hadane)*".")
+print(hadane)
+vysledok = len(hadane)*"."
+for x in range(10):
+    vstup = input("Pismenko:")
+    for i, znak in enumerate(hadane):
+        if vstup == hadane[i]:
+            vysledok = vysledok[:i] + znak + vysledok[i+1:]
+        else:
+            vysledok = vysledok
+    print(vysledok)
+    if vysledok == hadane:
+        print("Vyhral si")
+        break
+else:
+    print("Prehral si")
+
