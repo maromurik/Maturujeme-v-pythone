@@ -1,0 +1,62 @@
+fr = open("ucenie_sa_slovicok.txt","r",encoding = "windows-1250")
+slovenske = []
+anglicke = []
+zle = []
+zle2 = []
+chyby = 0
+for i, riadok in enumerate(fr):
+    if i %2 == 0:
+        slovenske.append(riadok.strip())
+    else:
+        anglicke.append(riadok.strip())
+vstup = input("slovenske/anglicke (zadaj S/A):")
+if vstup == "S":
+    print("Napis anglicky ekvivalent slov:")
+    for i in range(len(slovenske)):
+        print(slovenske[i])
+        vstup2 = input()
+        if vstup2 == anglicke[i]:
+            print("spravne")
+        else:
+            print("nespravne")
+            chyby+=1
+            zle.append(slovenske[i])
+if vstup == "A":
+    print("Napis slovensky ekvivalent slov:")
+    for i in range(len(anglicke)):
+        print(anglicke[i])
+        vstup2 = input()
+        if vstup2 == slovenske[i]:
+            print("spravne")
+        else:
+            print("nespravne")
+            chyby+=1
+            zle.append(anglicke[i])
+while len(zle) != 0:
+    zle2 = []
+    for slovo in zle:
+        if vstup == "S":
+            i = slovenske.index(slovo)
+            print(slovenske[i])
+            vstup2 = input()
+
+            if vstup2 == anglicke[i]:
+                print("spravne")
+            else:
+                print("nespravne")
+                chyby += 1
+                zle2.append(slovo)
+
+        if vstup == "A":
+            i = anglicke.index(slovo)
+            print(anglicke[i])
+            vstup2 = input()
+
+            if vstup2 == slovenske[i]:
+                print("spravne")
+            else:
+                print("nespravne")
+                chyby += 1
+                zle2.append(slovo)
+    zle = zle2
+print(f"Pocet chyb: {chyby}")
