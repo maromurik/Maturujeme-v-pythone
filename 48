@@ -1,0 +1,35 @@
+import random
+vysledky = []
+znova = []
+body = 0
+celkovo = 0
+for i in range(10):
+    a = random.randrange(1,11)
+    b = random.randrange(1,11)
+    vysledok = a*b
+    vysledky.append(vysledok)
+    celkovo+=1
+    vstup = int(input(f"{a}*{b}="))
+    if vstup == vysledky[i]:
+        print("spravne")
+        body+=1
+    else:
+        print("nespravne")
+        znova.append(a)
+        znova.append(b)
+        znova.append(vysledok)
+if len(znova) != 0:
+    for i in range(2,len(znova),3):
+        vysledok = znova[i]
+        b = znova[i-1]
+        a = znova[i-2]
+        vstup = int(input(f"{a}*{b}="))
+        if vstup == znova[i]:
+            print("spravne")
+        else:
+            print("nespravne")
+            znova.append(a)
+            znova.append(b)
+            znova.append(vysledok)
+
+print(f"Pocet bodov: {body}/{celkovo}")
