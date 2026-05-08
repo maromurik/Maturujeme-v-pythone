@@ -1,0 +1,31 @@
+import tkinter as tk
+root = tk.Tk()
+w= 500
+h = 200
+fw = open("jedla.txt","w",encoding = "utf-8")
+zarazka = 10
+velkost = w/4-zarazka
+farby = ["green","red","blue","orange"]
+kod = {0:"z",1:"c",2:"m",3:"o"}
+canvas = tk.Canvas(root,width = w, height=h, bg = "white")
+canvas.pack()
+canvas.create_text(w/2,50,text = "VÝBER JEDLA",font=("Arial",28,),fill = "red")
+for i in range(4):
+    canvas.create_rectangle(zarazka+i*velkost,75,zarazka+velkost+i*velkost,75+velkost,
+                            fill = farby[i],tags=i)
+
+def click(event):
+    objekty = canvas.find_overlapping(event.x, event.y, event.x, event.y)
+    if objekty:
+        tagy = list(canvas.gettags(objekty[0]))
+        tag = int(tagy[0])
+        if entry.get(): # ci to nie je prazdne
+            fw.write(entry.get()+" "+ kod[tag]+"\n")
+            fw.flush() #aby sa udaje hned zapisali
+canvas.bind("<Button-1>",click)
+
+tk.Label(root, text="Kód študenta:").pack()
+entry = tk.Entry(root)
+entry.pack()
+
+root.mainloop()
