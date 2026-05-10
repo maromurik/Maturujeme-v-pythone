@@ -1,0 +1,33 @@
+import tkinter as tk, random
+w= 700
+h = 800
+root = tk.Tk()
+canvas = tk.Canvas(root,width=w, height=h,bg="white")
+canvas.pack()
+ciara = canvas.create_line(w-75,0,w-75,h,fill = "red")
+pozicie = [20] * 15
+def lodicka(x, y):
+    plachta = random.randint(-3, 3)
+    canvas.create_line(x, y, x, y - 25, x + 10 + plachta, y - 10, x, y - 5)
+    canvas.create_polygon(x - 20, y, x + 20, y, x + 10, y + 8, x - 10, y + 8)
+def move():
+    canvas.delete("all")
+    canvas.create_line(w-75, 0, w-75, h, fill="red")
+    for i in range(15):
+        lodicka(pozicie[i], 35 * i + 50)
+        pozicie[i] += random.randrange(1, 11)
+    if max(pozicie) >= w-75:
+        vitaz = pozicie.index(max(pozicie))
+        canvas.create_text(w/2, h/2, text=f"Vyhrala lodicka cislo {vitaz+1}")
+    else:
+        canvas.after(50, move)
+def click(event):
+    canvas.delete("all")
+    ciara = canvas.create_line(w - 75, 0, w - 75, h, fill="red")
+    canvas.after(50,move)
+
+canvas.bind("<Button-1>",click)
+
+
+
+root.mainloop()
