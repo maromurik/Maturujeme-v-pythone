@@ -1,0 +1,25 @@
+fr = open("objednane_jedla.txt","r",encoding = "utf-8")
+jedla = {}
+celkovo = 0
+vsetky_dost = True
+nedostatocne = []
+for riadok in fr:
+    celkovo+=1
+    kod,kod_jedla = riadok.strip().split()
+    if kod_jedla in jedla:
+        jedla[kod_jedla]+= 1
+    else:
+        jedla[kod_jedla] = 1
+for jedlo in jedla.items():
+    jedlo = list(jedlo)
+    znak = jedlo[0]
+    if jedlo[1] < 20:
+        nedostatocne.append(znak)
+        vsetky_dost = False
+    kolko = str(jedlo[1])
+    print(znak+":"+kolko)
+print(f"Celkovo: {celkovo}")
+if vsetky_dost:
+    print(f"Vsetkych dost")
+else:
+    print(f"Nedostatok jedla {",".join(nedostatocne)}")
