@@ -1,0 +1,27 @@
+fr= open("mena_zamestnancov.txt","r",encoding = "windows-1250")
+fw = open("vybavene.txt","w",encoding="windows-1250")
+celkovo = 0
+vsetci = []
+mena = []
+priezviska = []
+najdlhsiem = 0
+najdlhsiep = 0
+for riadok in fr:
+    celkovo +=1
+    vsetci.append(riadok.strip())
+for i in range(len(vsetci)):
+    prva_pol = len(vsetci)/2
+    if i < prva_pol:
+        mena.append(vsetci[i])
+        if len(vsetci[i]) > najdlhsiem:
+            najdlhsiem = len(vsetci[i])
+    else:
+        priezviska.append(vsetci[i])
+        if len(vsetci[i]) > najdlhsiep:
+            najdlhsiep = len(vsetci[i])
+
+for i in range(len(mena)):
+    fw.write(mena[i]+(najdlhsiem-len(mena[i])+1)*" "+priezviska[i]+"\n")
+print(celkovo//2)
+print(najdlhsiem)
+print(najdlhsiep)
