@@ -1,30 +1,24 @@
 fr = open("ciernobiely_obrazok_1.txt","r",encoding = "utf-8")
-fw = open("novy.txt","w",encoding = "utf-8")
-rozmery = fr.readline().strip()
-fw.write(rozmery)
-print(rozmery)
-prvapol = "01234567"
-
+fw = open("konverzia_suboru_1_vystup.txt","w",encoding="utf-8")
+velkosti = fr.readline().strip()
+velkosti = velkosti.split()
+sirka = int(velkosti[0])
+vyska = int(velkosti[1])
+vsetky_body = sirka*vyska
+fw.write(str(sirka)+" ")
+fw.write(str(vyska)+"\n")
+print(vsetky_body)
 
 def spracuj_riadok(riadok):
-    vysledok = ""
-    riadok = riadok.strip()
-
-    for i in range(0, len(riadok), 2):
-        pixel = riadok[i:i + 2] 
-        hodnota = int(pixel, 16)
-
-        if hodnota < 128:
-            vysledok += "0 "
+    vysledok = []
+    for i in range(1,len(riadok),2):
+        if int(riadok[i-1]+riadok[i],16) < 128:
+            vysledok.append("0")
         else:
-            vysledok += "1 "
-
-    fw.write(vysledok.strip() + "\n")
+            vysledok.append("1")
+    fw.write((" ".join(vysledok)))
+    fw.write("\n")
 
 for riadok in fr:
     spracuj_riadok(riadok)
 
-
-
-fw.close()
-fr.close()
