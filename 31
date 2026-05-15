@@ -1,0 +1,54 @@
+import tkinter as tk
+root = tk.Tk()
+fr = open("ciernobiely_obrazok_1.txt","r",encoding = "utf-8")
+velkost = fr.readline().strip()
+velkost = velkost.split()
+sirka = int(velkost[0])
+vyska = int(velkost[1])
+fr.close()
+canvas = tk.Canvas(root,width= sirka,height=vyska,bg = "white")
+canvas.pack()
+def bod(x,y,farba):
+    canvas.create_line(x,y,x+1,y+1,fill = farba)
+len_ciernobiela = False
+def lcb():
+    global len_ciernobiela
+    len_ciernobiela = True
+    kresli()
+
+
+def kresli():
+    canvas.delete("all")
+    x = 0
+    y = 0
+    fr = open("ciernobiely_obrazok_1.txt", "r", encoding="utf-8")
+    nepotrebne = fr.readline()
+    for riadok in fr:
+        riadok = riadok.strip()
+        for i in range(0,len(riadok),2):
+            hexa = [riadok[i],riadok[i+1]]
+            farba = "#" + 3 * ("".join(hexa))
+            if len_ciernobiela == False:
+                bod(x, y, farba)
+            x += 1
+            if len_ciernobiela:
+                x-=1
+                if farba < "#7f":
+                    farba = "#000000"
+                    bod(x, y, farba)
+                    x += 1
+                else:
+                    farba = "#ffffff"
+                    bod(x, y, farba)
+                    x += 1
+
+
+        canvas.update()
+        x= 0
+        y+=1
+
+btn = tk.Button(root,text = "Len cierna a biela", command= lcb)
+btn.pack()
+
+kresli()
+root.mainloop()
