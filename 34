@@ -1,0 +1,22 @@
+fr = open("dekompresia_obrazka_1.txt","r",encoding="utf-8")
+fw = open("dekompresia_obrazka_1_vystup.txt","w",encoding="utf-8")
+velkosti = fr.readline().strip()
+velkosti = velkosti.split()
+sirka = int(velkosti[0])
+vyska = int(velkosti[1])
+vsetky_body = sirka*vyska
+
+def spracuj_riadok(riadok):
+    vysledok = ""
+    vysledok+= int(riadok[0])* "0"
+    for i in range(1,len(riadok)):
+        if i %2 == 1:
+            vysledok+= int(riadok[i])*"1"
+        else:
+            vysledok += int(riadok[i]) * "0"
+    fw.write(vysledok)
+    fw.write("\n")
+
+
+for riadok in fr:
+    spracuj_riadok(riadok.split())
