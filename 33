@@ -1,44 +1,36 @@
 import tkinter as tk
 root = tk.Tk()
-w = 500
+w = 512
 h = 600
-canvas = tk.Canvas(root, width = w, height = h, bg = "white")
+canvas = tk.Canvas(root,width=w,height=h,bg="white")
 canvas.pack()
-kluce = []
-vals = []
 fr = open("ciernobiely_obrazok_1.txt","r",encoding = "utf-8")
-odtiene = {}
-riadky = fr.readlines()
-val = riadky[0].strip().split()
-sirka = val[0]
-vyska = val[1]
-for riadok in riadky[1:]:
+velkosti = fr.readline().strip()
+velkosti = velkosti.split()
+sirka = int(velkosti[0])
+vyska = int(velkosti[1])
+vsetky_body = sirka*vyska
+print(vsetky_body)
+
+vysledok = {}
+for riadok in fr:
+    riadok = riadok.strip()
     for i in range(1,len(riadok),2):
-        odtien = riadok[i-1]+riadok[i]
-        if odtien in odtiene:
-            odtiene[odtien] += 1
+        hodnota = int(riadok[i-1]+riadok[i],16)
+        if hodnota in vysledok:
+            vysledok[hodnota] +=1
         else:
-            odtiene[odtien] = 1
-for i in odtiene.keys():
-    kluce.append(int(i,16))
-for i in odtiene.values():
-    vals.append(i)
-max_key = max(odtiene, key=odtiene.get)
-max_val = max(odtiene.values())
-pocet = sum(odtiene.values())
-mierka = max_val/500
-for i in range(len(kluce)):
-    x = kluce[i]
-    y = vals[i]/mierka
-    canvas.create_line(x*2,h,x*2,h-y)
+            vysledok[hodnota] = 1
 
-
-print(f"Sirka: {sirka}, vyska: {vyska}, pocet vsetkych bodov {pocet}")
-print(f"Najcastejsia farba: {max_key}, {max_val}krat")
-
-
-
-
-
+print(vysledok)
+def histogram():
+    mierka = max(vysledok.values())/ 500
+    for key,val in vysledok.items():
+        x = key*2
+        y1 = 0
+        y2 = val/mierka
+        canvas.create_line(x,h,x,h-y2,width=2,fill = "grey")
+    print(max(vysledok, key=vysledok.get))
+histogram()
 
 root.mainloop()
