@@ -1,0 +1,15 @@
+fr = open("hlasovanie_1.txt","r",encoding = "utf-8")
+subory = [(f"522{x+1}.txt")for x in range(9)]
+for i,riadok in enumerate(fr):
+    riadok = riadok.strip()
+    print(riadok)
+    for x in range(len(subory)):
+        subor = subory[x]
+        aktualny = open(subor,"a",encoding = "utf-8")
+        print(subor)
+        if riadok[-1] == subor[3]:
+            aktualny.write(str(i+1))
+            aktualny.write("\n")
+            print("nice")
+            aktualny.close()
+
