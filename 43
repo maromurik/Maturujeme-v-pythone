@@ -1,30 +1,53 @@
-import tkinter as tk
 import random
-farby = ["green","blue","red","grey","yellow"]
-cas = 60
 import tkinter as tk
 root = tk.Tk()
-canvas = tk.Canvas(root,width=800,height=600,bg="white")
+w= 600
+h= 600
+poc_x = 150
+poc_y = 150
+velkost_kablika = 10
+dlzka_kablika = 150
+sec = 60
+canvas = tk.Canvas(root,width=w,height=h,bg="white")
 canvas.pack()
-spravny = random.randrange(1,6)
+spravny = str(random.randrange(0,5))
 print(spravny)
-for i,farba in enumerate(farby):
-    canvas.create_rectangle(100,100+(i)*10,500,100+(i+1)*10,fill=farba)
-
-def click(event):
-    objekt = canvas.find_overlapping(event.x,event.y,event.x+1,event.y+1)
-    if spravny in objekt:
-        canvas.create_text(500,500,text="VYHRAL SI")
-timer = canvas.create_text(50,50,text = cas)
-def pocitadlo():
-    global cas
-    canvas.itemconfig(timer,text=cas)
-    cas-=1
-    if cas >=0:
-        canvas.after(1000,pocitadlo)
+hra_bezi = True
+cas = canvas.create_text(poc_x * 2.5, poc_y, text="60",font=("Arial",25))
+def kabliky(x,y,velkost,hrubka):
+    farby= ["green","blue","red","yellow","purple"]
+    canvas.create_text(x*1.5,y/2,text="Pyrotechnik",font=("Arial",20),fill="blue")
+    canvas.create_text(x*1.5,y/1.5,text="oznac spravny kablik")
+    for i in range(5):
+        farba = random.choice(farby)
+        canvas.create_rectangle(x,y+i*hrubka,x+velkost,(y+hrubka)+i*hrubka,fill=farba,tags =i)
+        farby.remove(farba)
+def tukanie(event):
+    global hra_bezi
+    objekty = canvas.find_overlapping(event.x,event.y,event.x,event.y)
+    for obj in objekty:
+        if obj:
+            obj = canvas.gettags(obj)
+            obj = list(obj)
+            idcko = obj[0]
+            print(idcko)
+            if idcko == spravny:
+                canvas.delete("all")
+                canvas.create_text(w/2,h/2,text= "VYHRAL SI!",font=("Arial",20))
+                hra_bezi =False
+canvas.bind("<Button-1>",tukanie)
+kabliky(poc_x,poc_y,dlzka_kablika,velkost_kablika)
+def timer():
+    global cas,sec
+    sec -= 1
+    canvas.itemconfig(cas,text=sec)
+    if sec <= 0:
+        canvas.delete("all")
     else:
-        canvas.create_text(500, 500, text="PREHRAL SI")
+        if hra_bezi:
+            canvas.after(1000, timer)
 
-canvas.bind("<Button-1>",click)
-pocitadlo()
+
+timer()
+
 root.mainloop()
